@@ -21,14 +21,14 @@ router.put('/:title',async(req,res)=>{
         {where:{title:titles}
     })
 })
-router.put('/:title',async(req,res)=>{
+router.put('/:title',[check("title").not().isEmpty().trim()],async(req,res)=>{
     const titles = req.params.title
     await Show.update({
         status:'on-going'},
         {where:{title:titles}
     })
 })
-router.put('/:id/rating',async(req,res)=>{
+router.put('/:id/rating',[check("id").not().isEmpty().trim()],async(req,res)=>{
     const id = req.params.id
     const findUsers = await User.findByPk(id)
         await Show.update({
